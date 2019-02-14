@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="rg.sqsf.project.mapper.MessageMapper" >
+  <resultMap id="BaseResultMap" type="rg.sqsf.project.model.Message" >
+    <id column="msgId" property="msgid" jdbcType="INTEGER" />
+    <result column="msgContent" property="msgcontent" jdbcType="VARCHAR" />
+    <result column="msgType" property="msgtype" jdbcType="INTEGER" />
+    <result column="msgTime" property="msgtime" jdbcType="VARCHAR" />
+    <result column="msgState" property="msgstate" jdbcType="INTEGER" />
+    <result column="carId" property="carid" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    msgId, msgContent, msgType, msgTime, msgState, carId, userid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from message
+    where msgId = #{msgid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from message
+    where msgId = #{msgid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="rg.sqsf.project.model.Message" >
+    insert into message (msgId, msgContent, msgType, 
+      msgTime, msgState, carId, 
+      userid)
+    values (#{msgid,jdbcType=INTEGER}, #{msgcontent,jdbcType=VARCHAR}, #{msgtype,jdbcType=INTEGER}, 
+      #{msgtime,jdbcType=VARCHAR}, #{msgstate,jdbcType=INTEGER}, #{carid,jdbcType=INTEGER}, 
+      #{userid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="rg.sqsf.project.model.Message" >
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="msgid != null" >
+        msgId,
+      </if>
+      <if test="msgcontent != null" >
+        msgContent,
+      </if>
+      <if test="msgtype != null" >
+        msgType,
+      </if>
+      <if test="msgtime != null" >
+        msgTime,
+      </if>
+      <if test="msgstate != null" >
+        msgState,
+      </if>
+      <if test="carid != null" >
+        carId,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="msgid != null" >
+        #{msgid,jdbcType=INTEGER},
+      </if>
+      <if test="msgcontent != null" >
+        #{msgcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="msgtype != null" >
+        #{msgtype,jdbcType=INTEGER},
+      </if>
+      <if test="msgtime != null" >
+        #{msgtime,jdbcType=VARCHAR},
+      </if>
+      <if test="msgstate != null" >
+        #{msgstate,jdbcType=INTEGER},
+      </if>
+      <if test="carid != null" >
+        #{carid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="rg.sqsf.project.model.Message" >
+    update message
+    <set >
+      <if test="msgcontent != null" >
+        msgContent = #{msgcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="msgtype != null" >
+        msgType = #{msgtype,jdbcType=INTEGER},
+      </if>
+      <if test="msgtime != null" >
+        msgTime = #{msgtime,jdbcType=VARCHAR},
+      </if>
+      <if test="msgstate != null" >
+        msgState = #{msgstate,jdbcType=INTEGER},
+      </if>
+      <if test="carid != null" >
+        carId = #{carid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where msgId = #{msgid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="rg.sqsf.project.model.Message" >
+    update message
+    set msgContent = #{msgcontent,jdbcType=VARCHAR},
+      msgType = #{msgtype,jdbcType=INTEGER},
+      msgTime = #{msgtime,jdbcType=VARCHAR},
+      msgState = #{msgstate,jdbcType=INTEGER},
+      carId = #{carid,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=INTEGER}
+    where msgId = #{msgid,jdbcType=INTEGER}
+  </update>
+</mapper>

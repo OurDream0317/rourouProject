@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="rg.sqsf.project.mapper.NewsMapper" >
+  <resultMap id="BaseResultMap" type="rg.sqsf.project.model.News" >
+    <id column="newId" property="newid" jdbcType="INTEGER" />
+    <result column="newTitle" property="newtitle" jdbcType="VARCHAR" />
+    <result column="newContent" property="newcontent" jdbcType="VARCHAR" />
+    <result column="newTime" property="newtime" jdbcType="VARCHAR" />
+    <result column="newUpdateTime" property="newupdatetime" jdbcType="VARCHAR" />
+    <result column="newState" property="newstate" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    newId, newTitle, newContent, newTime, newState
+  </sql>
+  <select id="findNews" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select  * from news
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from news
+    where newId = #{newid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="rg.sqsf.project.model.News" >
+    insert into news (newId, newTitle, newContent, 
+      newTime, newState)
+    values (#{newid,jdbcType=INTEGER}, #{newtitle,jdbcType=VARCHAR}, #{newcontent,jdbcType=VARCHAR}, 
+      #{newtime,jdbcType=VARCHAR}, #{newstate,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="rg.sqsf.project.model.News" >
+    insert into news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="newid != null" >
+        newId,
+      </if>
+      <if test="newtitle != null" >
+        newTitle,
+      </if>
+      <if test="newcontent != null" >
+        newContent,
+      </if>
+      <if test="newtime != null" >
+        newTime,
+      </if>
+      <if test="newstate != null" >
+        newState,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="newid != null" >
+        #{newid,jdbcType=INTEGER},
+      </if>
+      <if test="newtitle != null" >
+        #{newtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="newcontent != null" >
+        #{newcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="newtime != null" >
+        #{newtime,jdbcType=VARCHAR},
+      </if>
+      <if test="newstate != null" >
+        #{newstate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="rg.sqsf.project.model.News" >
+    update news
+    <set >
+      <if test="newtitle != null" >
+        newTitle = #{newtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="newcontent != null" >
+        newContent = #{newcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="newtime != null" >
+        newTime = #{newtime,jdbcType=VARCHAR},
+      </if>
+      <if test="newstate != null" >
+        newState = #{newstate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where newId = #{newid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="rg.sqsf.project.model.News" >
+    update news
+    set newTitle = #{newtitle,jdbcType=VARCHAR},
+      newContent = #{newcontent,jdbcType=VARCHAR},
+      newTime = #{newtime,jdbcType=VARCHAR},
+      newState = #{newstate,jdbcType=INTEGER}
+    where newId = #{newid,jdbcType=INTEGER}
+  </update>
+</mapper>

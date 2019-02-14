@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        table{
+            table-layout:fixed;/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+        }
+        td{
+            width:100%;
+            word-break:keep-all;/* 不换行 */
+            white-space:nowrap;/* 不换行 */
+            overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+            text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用*/
+        }
+        #td{
+            width: 200px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                url:"/backend/get/news",
+                type:"post",
+                data:{},
+                dataType:"json",
+                success:function (data) {
+                    $.each(data,function (index,obj) {
+                        $("tbody").append("<tr class=\"text-c\">" +
+                            "<td><input name='' type='checkbox' value=''></td>" +
+                            "<td>"+(index+1)+"</td>" +
+                            "<td>"+obj.newtitle+"</td>" +
+                            "<td id='td'>"+obj.newcontent+"</td>" +
+                            "<td>"+obj.newtime+"</td>" +
+                            "<td>"+obj.newupdatetime+"</td>" +
+                            "<td>"+obj.newstate+"</td>" +
+                            "<td><button>修改</button>&nbsp;&nbsp;&nbsp;<button>删除</button></td>" +
+                            "</tr>")
+                    })
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+
+<div style="margin: 0 auto">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="text">关键字查询</label>
+            <input type="text" class="form-control" id="text" placeholder="请输入关键字">
+        </div>
+        <div class="form-group">
+            <label for="status">状态查询</label>
+            <select class="form-control" id="status">
+                <option value="0">未删除</option>
+                <option value="1">已删除</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-default" style="background-color: dodgerblue">查询</button>
+    </form>
+    <button type="submit" class="btn btn-default" style="background-color: dodgerblue" id="addNews">添加资讯</button>
+</div>
+<div class="table-responsive" style="margin-top: 30px ">
+    <table class="table">
+        <thead>
+        <tr>
+            <td><button id="btn">全选</button></td>
+            <td>序号</td>
+            <td>标题</td>
+            <td id='td'>内容</td>
+            <td>新增时间</td>
+            <td>修改时间</td>
+            <td>删除状态</td>
+            <td>操作</td>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+</body>
+<script>
+    var tmp=0;
+    $("#btn").click(function () {
+        if(tmp!=0){
+            var val=$("input[type='checkbox']");
+            val.each(function () {
+                $(this).prop("checked",false);
+            })
+            tmp=0;
+            return;
+        }
+        var val=$("input[type='checkbox']");
+        val.each(function () {
+            $(this).prop("checked",true);
+        })
+        tmp=1;
+    })
+    $("#addNews").click(function () {
+        window.location.href="/content/addNews";
+    })
+</script>
+</html>

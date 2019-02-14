@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="utf-8" />
+		<title>首页</title>
+		<link rel="stylesheet" href="css/page.css" />
+		<script type="text/javascript" src="js/jquery.min.js" ></script>
+		<script type="text/javascript" src="js/index.js" ></script>
+		<script type="text/javascript">
+            /*$(function () {
+				$("#car").click(function () {
+					$("#iframe").attr("src","/content/car")
+					})
+            })*/
+		</script>
+	</head>
+
+	<body>
+		<div class="left">
+			<div class="bigTitle">二手车交易后台管理系统</div>
+			<div class="lines">
+				<div onclick="pageClick(this)" class="active"><a href="/content/news" style="text-decoration: none" target="iframeContent">资讯管理</a> </div>
+				<div onclick="pageClick(this)"><a href="/content/car" id="car" style="text-decoration: none" target="iframeContent">车辆管理</a></div>
+				<div onclick="pageClick(this)"><a href="/content/user" style="text-decoration: none" target="iframeContent">用户管理</a></div>
+				<div onclick="pageClick(this)"><a href="/content/order" style="text-decoration: none" target="iframeContent">订单管理</a></div>
+				<div onclick="pageClick(this)"><a href="/content/admin" style="text-decoration: none" target="iframeContent">管理员管理</a></div>
+			</div>
+		</div>
+		<div class="top">
+			<div class="leftTiyle" id="flTitle">资讯管理</div>
+			<div class="thisUser">当前用户：admin</div>
+		</div>
+		<div class="content">
+			<iframe allowtransparency="true"  th:src="${url}" scrolling="auto" width="100%" height="500px"  frameborder="0" name="iframeContent"></iframe>
+			</iframe>
+
+		</div>
+		
+		<div style="text-align:center;">
+
+</div>
+		
+	</body>
+
+</html>
